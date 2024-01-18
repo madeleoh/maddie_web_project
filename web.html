@@ -5,29 +5,33 @@
     </head>
     <body>
         <h1>To-Do</h1>
+        <var>
         <input type="checkbox"
         class="todo-checkbox"
         (click)="completeItem()">
+        </var>
         <br>
-        <button type="button">+</button>
+        <button id="plusButton">+</button>
 
     </body>
+<!-- javascript -->
+    <script>
+        var button = document.getElementById("plusButton");
+        button.addEventListener("click", function() {
+            //add new check box
+            //test for now
+            alert("Button Clicked");
+        });
+        function plusClicked(){
+
+        }
+    </script>
+<!-- css -->
+<style>
+    body{
+        background-color: #fff5d6
+        color: #ba8f02
+    }
+    </style>
     <ul>
-        <li>This is an Example</li>
     </ul>
-
-
-
-
-
-
-
-
-    <head>
-        <title>My HTML Page</title>
-    </head>
-    <body>
-        <h1>This is a Heading</h1>
-        <p>This is a paragraph.</p>
-    </body>
-</html>
