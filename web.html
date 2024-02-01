@@ -8,10 +8,7 @@
 <div id="taskList"></div>
     </head>
     <body>
-        <h1>To-Do
-        <input type="text" id="myInput" placeholder="Title...">
-        <span onclick="newElement()" class="addBtn">Add</span>
-        </h1>
+        <h1>To-Do</h1>
         <var>
         <input type="checkbox"
         class="todo-checkbox"
@@ -21,48 +18,64 @@
         <input type="text" id="taskInput" placeholder="Enter a task">
         <button onclick="addTask()">+</button>
     </body>
-<!-- javascript -->
-    <script>
-        var button = document.getElementById("plusButton");
-        button.addEventListener("click", function() {
-            //add new check box
-            //test for now
-            alert("Button Clicked");
-        });
-
-        function addTask() {
-    // Get the task input value
-    var taskInput = document.getElementById("taskInput");
-    var taskText = taskInput.value.trim();
-
-    // Check if the input is not empty
-    if (taskText !== "") {
-      // Create a new task element
-      var taskElement = document.createElement("div");
-      taskElement.innerHTML = '<input type="checkbox"> ' + taskText;
-
-      // Append the task element to the task list
-      document.getElementById("taskList").appendChild(taskElement);
-
-      // Clear the input field
-      taskInput.value = "";
-    } else {
-      alert("Please enter a task!");
-    }
-  }
-        function plusClicked(){
-
-        }
-    </script>
 <!-- css -->
 <style>
     body{
-        background-color: #fff5d6;
-        color: #ba8f02;
+        background-color: #ffd99d;
+        color: #FF9505;
     }
     h1{
        font-family: "Blippo", Courier, monospace    
     }
+    button{
+        background-color: #FF9505;
+        color:#FFEFD6;
+        border: 8px #FFEFD6;
+        transition-duration: 0.4s;
+        padding: 6px;
+        padding-top: 0.6px;
+        padding-bottom: 0.6px;
+        font-size: 18px;
+}
+    button:hover {
+    background-color: #FFEFD6;
+    color: #FF9505;
+    border: 8px #FF9505;
+    }
     </style>
     <ul>
     </ul>
+
+<!-- javascript -->
+<script>
+    var button = document.getElementById("plusButton");
+    button.addEventListener("click", function() {
+        //add new check box
+        //test for now
+        alert("Button Clicked");
+    });
+
+    function addTask() {
+// task input value
+var taskInput = document.getElementById("taskInput");
+var taskText = taskInput.value.trim();
+
+// input is not empty
+if (taskText !== "") {
+  // new task element
+  var taskElement = document.createElement("div");
+  taskElement.innerHTML = '<input type="checkbox"> ' + taskText;
+
+  // append
+  document.getElementById("taskList").appendChild(taskElement);
+
+  // clear it
+  taskInput.value = "";
+} else {
+  alert("Please enter a task!");
+}
+}
+    function plusClicked(){
+
+    }
+</script>
