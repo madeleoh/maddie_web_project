@@ -27,16 +27,27 @@
         color: #FF9505;
         font-family: "Blippo", Courier, monospace;
         font-size: medium;
+        padding-top: 50px;
+        padding-left: 600px;
     }
     input{
         font-family: "Blippo", Courier, monospace;
     }
     h1{
+        font-size: 50px;
        font-family: "Blippo", Courier, monospace;
        position: sticky
     }
+    #taskInput {
+        background: transparent;
+    border: none;
+    border-bottom: 1px solid #ff9505;
+    }
+    ::placeholder{
+        color:black;
+    }
     button{
-        background-color: #FF9505;
+        background-color: #ff9505;
         color:#FFEFD6;
         border: 8px #FFEFD6;
         transition-duration: 0.4s;
@@ -63,6 +74,23 @@
         alert("Button Clicked");
     });
 
+    var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
     function addTask() {
 // task input value
 var taskInput = document.getElementById("taskInput");
