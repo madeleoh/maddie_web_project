@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html lang=”en”>
-    <head>
-        <title>To Do List Web Project</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<div id="taskList"></div>
-    </head>
-    <body>
-        <header>
-            <h1>To-Do</h1>
-        </header>
-        <var>
-        <input type="checkbox"
-        class="todo-checkbox"
-        (click)="completeItem()">
-        </var>
-        <br>
-        <input type="text" id="taskInput" placeholder="Enter a task">
-        <button onclick="addTask()">+</button>
-    </body>
+<html lang="en">
+<head>
+    <title>To Do List Web Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>To-Do</h1>
+    </header>
+    <div id="taskList"></div>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button onclick="addTask()">+</button>
 <!-- css -->
 <style>
     body{
@@ -67,6 +60,7 @@
 
 <!-- javascript -->
 <script>
+    // Remove the first definition of addTask
     var button = document.getElementById("plusButton");
     button.addEventListener("click", function() {
         //add new check box
@@ -75,43 +69,41 @@
     });
 
     var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+    }
+
+    var close = document.getElementsByClassName("close");
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        };
+    }
+
     function addTask() {
-// task input value
-var taskInput = document.getElementById("taskInput");
-var taskText = taskInput.value.trim();
+        // task input value
+        var taskInput = document.getElementById("taskInput");
+        var taskText = taskInput.value.trim();
 
-// input is not empty
-if (taskText !== "") {
-  // new task element
-  var taskElement = document.createElement("div");
-  taskElement.innerHTML = '<input type="checkbox"> ' + taskText;
+        // input is not empty
+        if (taskText !== "") {
+            // new task element
+            var taskElement = document.createElement("div");
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText;
 
-  // append
-  document.getElementById("taskList").appendChild(taskElement);
+            // append under the heading
+            document.getElementById("taskList").appendChild(taskElement);
 
-  // clear it
-  taskInput.value = "";
-} else {
-  alert("Please enter a task!");
-}
-}
-    function plusClicked(){
-
+            // clear it
+            taskInput.value = "";
+        } else {
+            alert("Please enter a task!");
+        }
     }
 </script>
