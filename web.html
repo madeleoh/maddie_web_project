@@ -60,6 +60,26 @@
 
 <!-- javascript -->
 <script>
+// close button append
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7")
+    span.className = "close";
+    span.appendChild(txt);
+    myNodelist[i].appendChild(span);
+}
+// if you click on the close button to hide item in list
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+        var div = this.parentElement;
+        divstyle.display = "none";
+    }
+}
+
     // Remove the first definition of addTask
     var button = document.getElementById("plusButton");
     button.addEventListener("click", function() {
