@@ -10,6 +10,9 @@
     <header>
         <h1>To-Do</h1>
     </header>
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1"> Make a To-Do List</label><br>
+    <label>vehicle1<span class="close">x</span></label>
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
     <button onclick="addTask()">+</button>
@@ -60,7 +63,17 @@
 
 <!-- javascript -->
 <script>
-// close button append
+    //TEST TEST TEST
+    var closebtns = document.getElementsByClassName("close");
+var i;
+
+// Loop through the elements, and hide the parent, when clicked on
+for (i = 0; i < closebtns.length; i++) {
+  closebtns[i].addEventListener("click", function() {
+    this.parentElement.style.display = 'none';
+  });
+}
+// close button append (NEED TO REPLACE DOESNT WORK)
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
