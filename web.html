@@ -10,9 +10,7 @@
     <header>
         <h1>To-Do</h1>
     </header>
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-    <label for="vehicle1"> Make a To-Do List</label>
-    <span id="close" onclick="this.parentNode.parentNode.remove(); return false;">x</span>
+
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
     <button onclick="addTask()">+</button>
@@ -63,72 +61,23 @@
 
 <!-- javascript -->
 <script>
-    //TEST TEST TEST
-    var closebtns = document.getElementsByClassName("close");
-var i;
+        var closebtns = document.getElementsByClassName("close");
+        for (var i = 0; i < closebtns.length; i++) {
+            closebtns[i].addEventListener("click", function () {
+                this.parentElement.style.display = 'none';
+            });
+        }
 
-// Loop through the elements, and hide the parent, when clicked on
-for (i = 0; i < closebtns.length; i++) {
-  closebtns[i].addEventListener("click", function() {
-    this.parentElement.style.display = 'none';
-  });
-}
-// close button append (NEED TO REPLACE DOESNT WORK)
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7")
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-}
-// if you click on the close button to hide item in list
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-        var div = this.parentElement;
-        divstyle.display = "none";
-    }
-}
-
-    // Remove the first definition of addTask
-    var button = document.getElementById("plusButton");
-    button.addEventListener("click", function() {
-        //add new check box
-        //test for now
-        alert("Button Clicked");
-    });
-
-    var myNodelist = document.getElementsByTagName("LI");
-    var i;
-    for (i = 0; i < myNodelist.length; i++) {
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(txt);
-        myNodelist[i].appendChild(span);
-    }
-
-    var close = document.getElementsByClassName("close");
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        };
-    }
-
-    function addTask() {
-        // task input value
-        var taskInput = document.getElementById("taskInput");
-        var taskText = taskInput.value.trim();
+        function addTask() {
+            // task input value
+            var taskInput = document.getElementById("taskInput");
+            var taskText = taskInput.value.trim();
 
         // input is not empty
         if (taskText !== "") {
             // new task element
             var taskElement = document.createElement("div");
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText;
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u2715</span>';
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
@@ -138,5 +87,13 @@ for (i = 0; i < close.length; i++) {
         } else {
             alert("Please enter a task!");
         }
+    }
+
+    // Update the close button event listener
+var closeButtons = document.getElementsByClassName("close");
+for (var i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener("click", function () {
+        this.parentElement.style.display = 'none';
+        });
     }
 </script>
