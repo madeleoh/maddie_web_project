@@ -55,6 +55,26 @@
     color: #FF9505;
     border: 8px #FF9505;
     }
+    span.close {
+        content: "\u2715";
+        font-size: 2px;
+        background-color: #ff9505;
+        color: #FFEFD6;
+        border: 8px #FFEFD6;
+        transition-duration: 0.4s;
+        padding: 6px;
+        padding-top: 0.6px;
+        padding-bottom: 0.6px;
+        font-size: 18px;
+    }
+    span.close:hover {
+        background-color: #FFEFD6;
+        color: #FF9505;
+        border: 8px #FF9505;
+    }
+
+
+    
     </style>
     <ul>
     </ul>
@@ -77,7 +97,7 @@
         if (taskText !== "") {
             // new task element
             var taskElement = document.createElement("div");
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u2715</span>';
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
