@@ -18,15 +18,8 @@
     <button onclick="addTask()">+</button>
 
     <div id="listSidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onClick="closeNav()">&times;
-        </a>
-        <a href="#">test</a>
-    </div>
-
-    <div id="main">
-        <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
-        <h2>Collapsed Sidebar</h2>
-        <p>Content...</p>
+        <button class="openbtn" onclick="openNav()">&#9776;</button>
+        <button class="closebtn" onclick="closeNav()">&#9776;</button>
     </div>
 <!-- css -->
 <style>
@@ -81,14 +74,9 @@
         padding-bottom: 0.6px;
         font-size: 18px;
     }
-    span.close:hover {
-        background-color: #FFEFD6;
-        color: #FF9505;
-        border: 8px #FF9505;
-    }
     .sidebar {
         height: 100%;
-        width: 0;
+        width: 2;
         position: fixed;
         z-index: 1;
         top: 0;
@@ -96,6 +84,15 @@
         background-color:#FFEFD6;
         transition: 0.5s;
     }
+    span.close:hover {
+        background-color: #FFEFD6;
+        color: #FF9505;
+        border: 8px #FF9505;
+    }
+    a{
+       font-size: 2px; 
+    }
+
 
 
     
