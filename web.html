@@ -10,6 +10,7 @@
     <header>
         <h1>
         <div contenteditable="true">To-Do ✏️</div>
+        <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> <!-- Hamburger menu icon -->
         </h1>
     </header>
 
@@ -18,8 +19,7 @@
     <button onclick="addTask()">+</button>
 
     <div id="listSidebar" class="sidebar">
-        <button class="openbtn" onclick="openNav()">&#9776;</button>
-        <button class="closebtn" onclick="closeNav()">&#9776;</button>
+        <a href="#">Home</a>
     </div>
 <!-- css -->
 <style>
@@ -92,23 +92,37 @@
     a{
        font-size: 2px; 
     }
-
-
-
-    
+    input[type="checkbox"] {
+        width: 1em;
+        height: 1rem;
+        accent-color: #FF9505;
+    }
     </style>
     <ul>
     </ul>
 
 <!-- javascript -->
 <script>
-        var closebtns = document.getElementsByClassName("close");
-        for (var i = 0; i < closebtns.length; i++) {
-            closebtns[i].addEventListener("click", function () {
-                this.parentElement.style.display = 'none';
-            });
+    //sidebar
+    var sidebarOpen = false;
+
+    function toggleSidebar() {
+        var sidebar = document.getElementById("listSidebar");
+        var main = document.getElementById("main");
+
+        console.log("Toggle sidebar clicked. Current sidebarOpen value:", sidebarOpen)
+        if (!sidebarOpen) {
+            sidebar.style.width = "400px";
+            main.style.marginLeft = "400px";
+            sidebarOpen = true;
+        } else {
+            sidebar.style.width = "0px";
+            main.style.marginLeft = "0px";
+            sidebarOpen = false;
         }
 
+        console.log("After toggle,sidebarOpen value:", sidebarOpen)
+    }
         function addTask() {
             // task input value
             var taskInput = document.getElementById("taskInput");
@@ -130,23 +144,11 @@
         }
     }
 
-    // Update the close button event listener
-var closeButtons = document.getElementsByClassName("close");
-for (var i = 0; i < closeButtons.length; i++) {
-    closeButtons[i].addEventListener("click", function () {
-        this.parentElement.style.display = 'none';
+        // Update the close button event listener
+    var closeButtons = document.getElementsByClassName("close");
+    for (var i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener("click", function () {
+            this.parentElement.style.display = 'none';
         });
-    }
-
-
-//sidebar
-function openNav() {
-    document.getElementById("listSidebar").style.width = "400px"
-    document.getElementById("main").style.marginLeft = "400px"
-}
-
-function closeNav() {
-    document.getElementById("listSidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
+        }
 </script>
