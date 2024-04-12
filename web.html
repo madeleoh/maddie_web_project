@@ -10,9 +10,10 @@
     <header>
         <h1>
         <div contenteditable="true">To-Do ✏️</div>
-        <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> <!-- Hamburger menu icon -->
         </h1>
     </header>
+
+    <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> <!-- Hamburger menu icon -->
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
@@ -41,8 +42,8 @@
     }
     #taskInput {
         background: transparent;
-    border: none;
-    border-bottom: 1px solid #ff9505;
+        border: none;
+        border-bottom: 1px solid #ff9505;
     }
     ::placeholder{
         color:black;
@@ -58,9 +59,9 @@
         font-size: 18px;
 }
     button:hover {
-    background-color: #FFEFD6;
-    color: #FF9505;
-    border: 8px #FF9505;
+        background-color: #FFEFD6;
+        color: #FF9505;
+        border: 8px #FF9505;
     }
     span.close {
         content: "\u2715";
@@ -76,13 +77,19 @@
     }
     .sidebar {
         height: 100%;
-        width: 2;
+        width: 0;
         position: fixed;
         z-index: 1;
         top: 0;
         left: 0;
         background-color:#FFEFD6;
         transition: 0.5s;
+    }
+    .openbtn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
     }
     span.close:hover {
         background-color: #FFEFD6;
@@ -107,22 +114,19 @@
     var sidebarOpen = false;
 
     function toggleSidebar() {
-        var sidebar = document.getElementById("listSidebar");
-        var main = document.getElementById("main");
+    var sidebar = document.getElementById("listSidebar");
+    var main = document.getElementById("main");
 
-        console.log("Toggle sidebar clicked. Current sidebarOpen value:", sidebarOpen)
-        if (!sidebarOpen) {
-            sidebar.style.width = "400px";
-            main.style.marginLeft = "400px";
-            sidebarOpen = true;
-        } else {
-            sidebar.style.width = "0px";
-            main.style.marginLeft = "0px";
-            sidebarOpen = false;
-        }
-
-        console.log("After toggle,sidebarOpen value:", sidebarOpen)
+    if (!sidebarOpen) {
+        sidebar.style.width = "400px";
+        main.style.marginLeft = "400px";
+        sidebarOpen = true;
+    } else {
+        sidebar.style.width = "0px";
+        main.style.marginLeft = "0px";
+        sidebarOpen = false;
     }
+}
         function addTask() {
             // task input value
             var taskInput = document.getElementById("taskInput");
@@ -150,5 +154,5 @@
         closeButtons[i].addEventListener("click", function () {
             this.parentElement.style.display = 'none';
         });
-        }
+    }
 </script>
