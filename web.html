@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>
-        <div contenteditable="true">To-Do ✏️</div>
+            <div contenteditable="true">To-Do ✏️</div>
         </h1>
     </header>
 
@@ -20,8 +20,13 @@
     <button onclick="addTask()">+</button>
 
     <div id="listSidebar" class="sidebar">
-        <a href="#">Home</a>
+        <a href="#" onclick="toggleSidebar()"></a>
+        <!--stuff on sidebar will go here i think, will make function to make links??-->
     </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 <!-- css -->
 <style>
     body{
@@ -84,11 +89,12 @@
         left: 0;
         background-color:#FFEFD6;
         transition: 0.5s;
+        border-top: 25px solid #FF9505;
     }
     .openbtn {
         position: fixed;
-        top: 20px;
-        left: 20px;
+        top: 0px;
+        left: 0px;
         z-index: 2;
     }
     span.close:hover {
@@ -115,7 +121,7 @@
 
     function toggleSidebar() {
     var sidebar = document.getElementById("listSidebar");
-    var main = document.getElementById("main");
+    var main = document.getElementById("taskList");
 
     if (!sidebarOpen) {
         sidebar.style.width = "400px";
