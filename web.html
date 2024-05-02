@@ -21,6 +21,7 @@
 
     <div id="listSidebar" class="sidebar">
         <a href="#" onclick="toggleSidebar()"></a>
+        <button onclick="duplicatePage()">+</button>
         <!--stuff on sidebar will go here i think, will make function to make links??-->
     </div>
 
@@ -132,6 +133,7 @@
         main.style.marginLeft = "0px";
         sidebarOpen = false;
     }
+
 }
         function addTask() {
             // task input value
@@ -149,10 +151,27 @@
 
             // clear it
             taskInput.value = "";
+
+            var sidebar = document.getElementById("listSidebar");
+            var newPageUrl = 'new_page.html'; // Replace with the URL of the new page
+            var newLink = document.createElement("a");
+            newLink.href = newPageUrl;
+            newLink.textContent = taskText; // Set link text as task text
+            sidebar.appendChild(newLink);
         } else {
             alert("Please enter a task!");
         }
     }
+
+    function duplicatePage() {
+        //current url
+        var currentUrl = window.location.href;
+
+        //new window
+        window.open(currentUrl, '_blank');
+    }
+
+
 
         // Update the close button event listener
     var closeButtons = document.getElementsByClassName("close");
