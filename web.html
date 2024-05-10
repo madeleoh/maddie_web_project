@@ -21,11 +21,15 @@
 
     <div id="listSidebar" class="sidebar">
         <a href="#" onclick="toggleSidebar()"></a>
-        <button onclick="duplicatePage()">+</button>
+        <!--<button onclick="addPage()">+</button>-->
+        <ul id="pageLinks"></ul>
         <!--stuff on sidebar will go here i think, will make function to make links??-->
+        <!--to make current page file-->
+        <a href="javascript:window.location.reload(true)">To-Do</a>
     </div>
 
     <script src="script.js"></script>
+    <button class="duplicatePage" onclick="duplicatePage()">+</button>
 </body>
 </html>
 <!-- css -->
@@ -98,13 +102,19 @@
         left: 0px;
         z-index: 2;
     }
+    .duplicatePage{
+        position: fixed;
+        top: 0px;
+        left: 30px;
+        z-index: 4;
+    }
     span.close:hover {
         background-color: #FFEFD6;
         color: #FF9505;
         border: 8px #FF9505;
     }
     a{
-       font-size: 2px; 
+       font-size: 20px; 
     }
     input[type="checkbox"] {
         width: 1em;
@@ -135,6 +145,14 @@
     }
 
 }
+    function duplicatePage(){
+        var url = window.location.href;
+        window.open(url, '_blank')
+        var link = window.open(url, '_blank').location.href;
+        alert(link);
+        
+    }
+
         function addTask() {
             // task input value
             var taskInput = document.getElementById("taskInput");
