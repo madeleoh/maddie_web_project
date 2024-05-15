@@ -20,7 +20,7 @@
     <button onclick="addTask()">+</button>
 
     <div id="listSidebar" class="sidebar">
-        <a href="#" onclick="toggleSidebar()"></a>
+        <a href="#" onclick="toggleSidebar()">&#x2715;</a>
         <!--<button onclick="addPage()">+</button>-->
         <ul id="pageLinks"></ul>
         <!--stuff on sidebar will go here i think, will make function to make links??-->
@@ -146,11 +146,20 @@
 
 }
     function duplicatePage(){
-        var url = window.location.href;
-        window.open(url, '_blank')
-        var link = window.open(url, '_blank').location.href;
-        alert(link);
-        
+        var currentUrl = window.location.href;
+        var newWindow = window.open(currentUrl, '_blank');
+        if (newWindow) {
+            var newLink = document.createElement("a");
+            newLink.href = newWindow.location.href;
+            newLink.textContect = newWindow.document.title;
+
+            var pageLinks = document.getElementById("pageLinks");
+            var listItem = documents.createElement("li");
+            listItem.appendChild(newLink);
+            pageLinks.appendChild(listItem);
+        } else {
+            alert("hi test test");
+        }       
     }
 
         function addTask() {
@@ -166,7 +175,6 @@
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
-
             // clear it
             taskInput.value = "";
 
@@ -175,22 +183,15 @@
             var newLink = document.createElement("a");
             newLink.href = newPageUrl;
             newLink.textContent = taskText; // Set link text as task text
-            sidebar.appendChild(newLink);
+
+            var pageLinks = document.getElementById("pageLinks");
+            var listItem = document.createElement("li");
+            listItem.appendChild(newLink);
+            pageLinks.appendChild(listItem);
         } else {
             alert("Please enter a task!");
         }
     }
-
-    function duplicatePage() {
-        //current url
-        var currentUrl = window.location.href;
-
-        //new window
-        window.open(currentUrl, '_blank');
-    }
-
-
-
         // Update the close button event listener
     var closeButtons = document.getElementsByClassName("close");
     for (var i = 0; i < closeButtons.length; i++) {
