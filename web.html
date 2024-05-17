@@ -153,13 +153,22 @@
             newLink.href = newWindow.location.href;
             newLink.textContect = newWindow.document.title;
 
-            var pageLinks = document.getElementById("pageLinks");
-            var listItem = documents.createElement("li");
-            listItem.appendChild(newLink);
-            pageLinks.appendChild(listItem);
+            // var pageLinks = document.getElementById("pageLinks");
+            // var listItem = documents.createElement("li");
+            // listItem.appendChild(newLink);
+            // pageLinks.appendChild(listItem);
         } else {
             alert("hi test test");
         }       
+        const newPageUrl = URL.createObjectURL(newWindow);
+        const newLink = document.createElement('a');
+        newLink.href = newPageUrl;
+        newLink.textContent = 'Link to new page';
+        newLink.className = 'new-link';
+        newLink.target = '_blank';
+
+        linkContainer.appendChild(newLink);
+
     }
 
         function addTask() {
