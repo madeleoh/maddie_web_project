@@ -120,6 +120,7 @@
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
+        position: fixed;
     }
     </style>
     <ul>
@@ -153,22 +154,13 @@
             newLink.href = newWindow.location.href;
             newLink.textContect = newWindow.document.title;
 
-            // var pageLinks = document.getElementById("pageLinks");
-            // var listItem = documents.createElement("li");
-            // listItem.appendChild(newLink);
-            // pageLinks.appendChild(listItem);
+            var pageLinks = document.getElementById("pageLinks");
+            var listItem = documents.createElement("li");
+            listItem.appendChild(newLink);
+            pageLinks.appendChild(listItem);
         } else {
             alert("hi test test");
         }       
-        const newPageUrl = URL.createObjectURL(newWindow);
-        const newLink = document.createElement('a');
-        newLink.href = newPageUrl;
-        newLink.textContent = 'Link to new page';
-        newLink.className = 'new-link';
-        newLink.target = '_blank';
-
-        linkContainer.appendChild(newLink);
-
     }
 
         function addTask() {
@@ -186,17 +178,17 @@
             document.getElementById("taskList").appendChild(taskElement);
             // clear it
             taskInput.value = "";
+            
+            //var sidebar = document.getElementById("listSidebar");
+            //var newPageUrl = 'new_page.html'; // Replace with the URL of the new page
+            //var newLink = document.createElement("a");
+            //newLink.href = newPageUrl;
+            //newLink.textContent = taskText; // Set link text as task text
 
-            var sidebar = document.getElementById("listSidebar");
-            var newPageUrl = 'new_page.html'; // Replace with the URL of the new page
-            var newLink = document.createElement("a");
-            newLink.href = newPageUrl;
-            newLink.textContent = taskText; // Set link text as task text
-
-            var pageLinks = document.getElementById("pageLinks");
-            var listItem = document.createElement("li");
-            listItem.appendChild(newLink);
-            pageLinks.appendChild(listItem);
+            //var pageLinks = document.getElementById("pageLinks");
+            //var listItem = document.createElement("li");
+            //listItem.appendChild(newLink);
+            //pageLinks.appendChild(listItem);
         } else {
             alert("Please enter a task!");
         }
