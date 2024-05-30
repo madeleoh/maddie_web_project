@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>
-            <div contenteditable="true">To-Do ✏️</div>
+            <div contenteditable="true" id="pageTitle" oninput="saveTitle()">To-Do ✏️</div>
         </h1>
     </header>
 
@@ -128,6 +128,62 @@
 
 <!-- javascript -->
 <script>
+        function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 10 * 20 * 40 * 60 * 1200));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";   
+    }
+
+    function getCookie(name) {
+        const cname = name + "=";
+        const decodedCookie = decodedURIComponent(document.cookie);
+        const ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i].trim();
+            while (c.charAt(0) == '') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(cname) == 0) {
+                return c.substring(cname.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function saveTitle() {
+        const title = document.getElementById("pageTitle").innerText;
+        setCookie("pageTitle", title, 30);
+    }
+
+    function saveTasks() {
+        const tasks = document.getElementById("taskList").innerHTML;
+        setCookie("taskList", tasks, 30);
+    }
+
+    function loadTitle() {
+        const title = getCookie("pageTitle");
+        if (title !== "") {
+            document.getElementById("pageTitle").innerText = title;
+        }
+    }
+
+    function loadTasks(){
+        const tasks = getCookie("taskList");
+        if (tasks !== "") {
+            document.getElementById("taskList").innerText = tasks;
+        }
+    }
+
+    //title and tasks go on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        loadTitle();
+        loadTasks();
+        addCloseEventListeners();
+    });
+
+
+
     //sidebar
     var sidebarOpen = false;
 
@@ -178,26 +234,22 @@
             document.getElementById("taskList").appendChild(taskElement);
             // clear it
             taskInput.value = "";
-            
-            //var sidebar = document.getElementById("listSidebar");
-            //var newPageUrl = 'new_page.html'; // Replace with the URL of the new page
-            //var newLink = document.createElement("a");
-            //newLink.href = newPageUrl;
-            //newLink.textContent = taskText; // Set link text as task text
-
-            //var pageLinks = document.getElementById("pageLinks");
-            //var listItem = document.createElement("li");
-            //listItem.appendChild(newLink);
-            //pageLinks.appendChild(listItem);
+            saveTasks();
         } else {
             alert("Please enter a task!");
         }
+    }
+
+    function removeTask(element) {
+        element.parentNode.style.display = 'none';
+        saveTasks();
     }
         // Update the close button event listener
     var closeButtons = document.getElementsByClassName("close");
     for (var i = 0; i < closeButtons.length; i++) {
         closeButtons[i].addEventListener("click", function () {
             this.parentElement.style.display = 'none';
+            saveTasks();
         });
     }
 </script>
