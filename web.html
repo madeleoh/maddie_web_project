@@ -20,7 +20,7 @@
     <button onclick="addTask()">+</button>
 
     <div id="listSidebar" class="sidebar">
-        <a href="#" onclick="toggleSidebar()">&#x2715;</a>
+        <a href="#" onclick="toggleSidebar()"></a>
         <!--<button onclick="addPage()">+</button>-->
         <ul id="pageLinks"></ul>
         <!--stuff on sidebar will go here i think, will make function to make links??-->
@@ -128,22 +128,21 @@
 
 <!-- javascript -->
 <script>
-        function setCookie(name, value, days) {
+    function setCookie(name, value, days) {
         const date = new Date();
-        date.setTime(date.getTime() + (days * 10 * 20 * 40 * 60 * 1200));
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
-        document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";   
+        let newCookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/;"; 
+        document.cookie = newCookie;  
+        console.log(document.cookie); 
     }
 
     function getCookie(name) {
         const cname = name + "=";
-        const decodedCookie = decodedURIComponent(document.cookie);
+        const decodedCookie = decodeURIComponent(document.cookie);
         const ca = decodedCookie.split(';');
         for (let i = 0; i < ca.length; i++) {
             let c = ca[i].trim();
-            while (c.charAt(0) == '') {
-                c = c.substring(1);
-            }
             if (c.indexOf(cname) == 0) {
                 return c.substring(cname.length, c.length);
             }
@@ -163,6 +162,7 @@
 
     function loadTitle() {
         const title = getCookie("pageTitle");
+        console.log(title);
         if (title !== "") {
             document.getElementById("pageTitle").innerText = title;
         }
@@ -172,6 +172,7 @@
         const tasks = getCookie("taskList");
         if (tasks !== "") {
             document.getElementById("taskList").innerText = tasks;
+            addCloseEventListeners();
         }
     }
 
@@ -179,10 +180,44 @@
     document.addEventListener("DOMContentLoaded", function() {
         loadTitle();
         loadTasks();
-        addCloseEventListeners();
     });
 
 
+    function addTask() {
+            // task input value
+            var taskInput = document.getElementById("taskInput");
+            var taskText = taskInput.value.trim();
+
+        // input is not empty
+        if (taskText !== "") {
+            // new task element
+            var taskElement = document.createElement("div");
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
+
+            // append under the heading
+            document.getElementById("taskList").appendChild(taskElement);
+            // clear it
+            taskInput.value = "";
+            saveTasks();
+        } else {
+            alert("Please enter a task!");
+        }
+    }
+
+    function removeTask(element) {
+        element.parentNode.style.display = 'none';
+        saveTasks();
+    }
+
+    function addCloseEventListeners() {
+        var closeButtons = document.getElementsByClassName("close");
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].addEventListener("click", function () {
+                this.parentElement.style.display = 'none';
+                saveTasks();
+            });
+        }
+    }
 
     //sidebar
     var sidebarOpen = false;
@@ -217,39 +252,5 @@
         } else {
             alert("hi test test");
         }       
-    }
-
-        function addTask() {
-            // task input value
-            var taskInput = document.getElementById("taskInput");
-            var taskText = taskInput.value.trim();
-
-        // input is not empty
-        if (taskText !== "") {
-            // new task element
-            var taskElement = document.createElement("div");
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
-
-            // append under the heading
-            document.getElementById("taskList").appendChild(taskElement);
-            // clear it
-            taskInput.value = "";
-            saveTasks();
-        } else {
-            alert("Please enter a task!");
-        }
-    }
-
-    function removeTask(element) {
-        element.parentNode.style.display = 'none';
-        saveTasks();
-    }
-        // Update the close button event listener
-    var closeButtons = document.getElementsByClassName("close");
-    for (var i = 0; i < closeButtons.length; i++) {
-        closeButtons[i].addEventListener("click", function () {
-            this.parentElement.style.display = 'none';
-            saveTasks();
-        });
     }
 </script>
