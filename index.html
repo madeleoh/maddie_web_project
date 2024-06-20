@@ -13,23 +13,23 @@
         </h1>
     </header>
 
-    <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> <!-- Hamburger menu icon -->
+    <!--<button class="openbtn" onclick="toggleSidebar()">&#9776;</button> Hamburger menu icon -->
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
     <button onclick="addTask()">+</button>
 
-    <div id="listSidebar" class="sidebar">
+    <!--<div id="listSidebar" class="sidebar">
         <a href="#" onclick="toggleSidebar()"></a>
-        <!--<button onclick="addPage()">+</button>-->
+        <button onclick="addPage()">+</button>
         <ul id="pageLinks"></ul>
-        <!--stuff on sidebar will go here i think, will make function to make links??-->
-        <!--to make current page file-->
+        stuff on sidebar will go here i think, will make function to make links??
+        to make current page file-->
         <a href="javascript:window.location.reload(true)">To-Do</a>
-    </div>
+    <!--</div>
 
     <script src="script.js"></script>
-    <button class="duplicatePage" onclick="duplicatePage()">+</button>
+    <button class="duplicatePage" onclick="duplicatePage()">+</button>-->
 </body>
 </html>
 <!-- css -->
@@ -48,7 +48,7 @@
     h1{
         font-size: 50px;
        font-family: "Blippo", Courier, monospace;
-       position: sticky
+       position: sticky;
     }
     #taskInput {
         background: transparent;
@@ -116,11 +116,17 @@
     a{
        font-size: 20px; 
     }
+
+    .task-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
     input[type="checkbox"] {
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
-        position: fixed;
+        position: relative;
     }
     </style>
     <ul>
@@ -219,8 +225,8 @@
         }
     }
 
-    //sidebar
-    var sidebarOpen = false;
+
+    /*var sidebarOpen = false;
 
     function toggleSidebar() {
     var sidebar = document.getElementById("listSidebar");
@@ -236,21 +242,31 @@
         sidebarOpen = false;
     }
 
-}
+
+    }
     function duplicatePage(){
         var currentUrl = window.location.href;
         var newWindow = window.open(currentUrl, '_blank');
         if (newWindow) {
             var newLink = document.createElement("a");
             newLink.href = newWindow.location.href;
-            newLink.textContect = newWindow.document.title;
+            newLink.textContent = newWindow.document.title;
 
             var pageLinks = document.getElementById("pageLinks");
-            var listItem = documents.createElement("li");
+            var listItem = document.createElement("li");
             listItem.appendChild(newLink);
             pageLinks.appendChild(listItem);
         } else {
             alert("hi test test");
         }       
     }
+
+    function hideLink(){
+        if (sidebarOpen) {
+            newLink.style.display = "none";
+        }
+        //else {
+            //newLink.style.display = 
+        //}
+    } */
 </script>
