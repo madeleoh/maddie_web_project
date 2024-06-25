@@ -13,23 +13,23 @@
         </h1>
     </header>
 
-    <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> <!-- Hamburger menu icon -->
+    <!-- <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> Hamburger menu icon -->
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
     <button onclick="addTask()">+</button>
 
-    <div id="listSidebar" class="sidebar">
+    <!-- <div id="listSidebar" class="sidebar">
         <a href="#" onclick="toggleSidebar()"></a>
-        <!--<button onclick="addPage()">+</button>-->
+        <button onclick="addPage()">+</button>
         <ul id="pageLinks"></ul>
-        <!--stuff on sidebar will go here i think, will make function to make links??-->
-        <!--to make current page file-->
+        stuff on sidebar will go here i think, will make function to make links??
+        to make current page file
         <a href="javascript:window.location.reload(true)">To-Do</a>
-    </div>
+    </div> -->
 
     <script src="script.js"></script>
-    <button class="duplicatePage" onclick="duplicatePage()">+</button>
+    <!-- <button class="duplicatePage" onclick="duplicatePage()">+</button> -->
 </body>
 </html>
 <!-- css -->
@@ -62,10 +62,10 @@
         background-color: #ff9505;
         color:#FFEFD6;
         border: 8px #FFEFD6;
-        transition-duration: 0.4s;
-        padding: 6px;
-        padding-top: 0.6px;
-        padding-bottom: 0.6px;
+        transition-duration: 0.5s;
+        padding: 5px;
+        padding-top: 0.5px;
+        padding-bottom: 0.5px;
         font-size: 18px;
 }
     button:hover {
@@ -120,7 +120,6 @@
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
-        position: fixed;
     }
     </style>
     <ul>
@@ -155,10 +154,10 @@
         setCookie("pageTitle", title, 30);
     }
 
-    function saveTasks() {
+    /*function saveTasks() {
         const tasks = document.getElementById("taskList").innerHTML;
         setCookie("taskList", tasks, 30);
-    }
+    }*/
 
     function loadTitle() {
         const title = getCookie("pageTitle");
@@ -168,18 +167,18 @@
         }
     }
 
-    function loadTasks(){
+    /*function loadTasks(){
         const tasks = getCookie("taskList");
         if (tasks !== "") {
             document.getElementById("taskList").innerText = tasks;
             addCloseEventListeners();
         }
-    }
+    }*/
 
     //title and tasks go on page load
     document.addEventListener("DOMContentLoaded", function() {
         loadTitle();
-        loadTasks();
+        //loadTasks();
     });
 
 
