@@ -17,7 +17,12 @@
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
-    <button onclick="addTask()">+</button>
+    <div>
+        <button id="redFlag" onclick="selectFlag('red')">&#x1F6D1;</button>
+        <button id="yellowFlag" onclick="selectFlag('yellow')">&#x1F6AB;</button>
+        <button id="greenFlag" onclick="selectFlag('green')">&#x2705;</button>
+        <button onclick="addTask()">+</button>
+    </div>
 
     <!-- <div id="listSidebar" class="sidebar">
         <a href="#" onclick="toggleSidebar()"></a>
@@ -47,8 +52,8 @@
     }
     h1{
         font-size: 50px;
-       font-family: "Blippo", Courier, monospace;
-       position: sticky
+        font-family: "Blippo", Courier, monospace;
+        position: sticky
     }
     #taskInput {
         background: transparent;
@@ -85,7 +90,7 @@
         padding-bottom: 0.6px;
         font-size: 18px;
     }
-    .sidebar {
+    /*.sidebar {
         height: 100%;
         width: 0;
         position: fixed;
@@ -107,7 +112,7 @@
         top: 0px;
         left: 30px;
         z-index: 4;
-    }
+    }*/
     span.close:hover {
         background-color: #FFEFD6;
         color: #FF9505;
@@ -127,6 +132,8 @@
 
 <!-- javascript -->
 <script>
+    let selectedFlag = null;
+
     function setCookie(name, value, days) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -181,22 +188,49 @@
         //loadTasks();
     });
 
+function selectFlag(flag) {
+    selectedFlag = flag;
+    document.getElementById("redFlag").style.border = "none";
+    document.getElementById("yellowFlag").style.border = "none";
+    document.getElementById("greenFlag").style.border = "none";
+
+    document.getElementById(flag + "Flag").style.border = "2px solid black";
+}
 
     function addTask() {
-            // task input value
-            var taskInput = document.getElementById("taskInput");
-            var taskText = taskInput.value.trim();
-
+        // task input value
+        var taskInput = document.getElementById("taskInput");
+        var taskText = taskInput.value.trim();
+        
+        if (!selectedFlag) {
+            alert("Please select a flag before adding task!");
+            return;
+        }
         // input is not empty
         if (taskText !== "") {
             // new task element
             var taskElement = document.createElement("div");
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
+
+            let flagIcon = "";
+
+        if (selectedFlag === "red") {
+            flagIcon = "&#x1F6D1;";
+        } else if (selectedFlag === "yellow") {
+            flagIcon = "&#x1F6AB;";
+        } else if (selectedFlag === "green") {
+            flagIcon = "&#x2705;";
+        }
+
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + flagIcon + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
             // clear it
             taskInput.value = "";
+            selectedFlag = null;
+            document.getElementById("redFlag").style.border = "none";
+            document.getElementById("yellowFlag").style.border = "none";
+            document.getElementById("greenFlag").style.border = "none";
             saveTasks();
         } else {
             alert("Please enter a task!");
@@ -218,38 +252,38 @@
         }
     }
 
-    //sidebar
-    var sidebarOpen = false;
+//     //sidebar
+//     var sidebarOpen = false;
 
-    function toggleSidebar() {
-    var sidebar = document.getElementById("listSidebar");
-    var main = document.getElementById("taskList");
+//     function toggleSidebar() {
+//     var sidebar = document.getElementById("listSidebar");
+//     var main = document.getElementById("taskList");
 
-    if (!sidebarOpen) {
-        sidebar.style.width = "400px";
-        main.style.marginLeft = "400px";
-        sidebarOpen = true;
-    } else {
-        sidebar.style.width = "0px";
-        main.style.marginLeft = "0px";
-        sidebarOpen = false;
-    }
+//     if (!sidebarOpen) {
+//         sidebar.style.width = "400px";
+//         main.style.marginLeft = "400px";
+//         sidebarOpen = true;
+//     } else {
+//         sidebar.style.width = "0px";
+//         main.style.marginLeft = "0px";
+//         sidebarOpen = false;
+//     }
 
-}
-    function duplicatePage(){
-        var currentUrl = window.location.href;
-        var newWindow = window.open(currentUrl, '_blank');
-        if (newWindow) {
-            var newLink = document.createElement("a");
-            newLink.href = newWindow.location.href;
-            newLink.textContect = newWindow.document.title;
+// }
+//     function duplicatePage(){
+//         var currentUrl = window.location.href;
+//         var newWindow = window.open(currentUrl, '_blank');
+//         if (newWindow) {
+//             var newLink = document.createElement("a");
+//             newLink.href = newWindow.location.href;
+//             newLink.textContect = newWindow.document.title;
 
-            var pageLinks = document.getElementById("pageLinks");
-            var listItem = documents.createElement("li");
-            listItem.appendChild(newLink);
-            pageLinks.appendChild(listItem);
-        } else {
-            alert("hi test test");
-        }       
-    }
+//             var pageLinks = document.getElementById("pageLinks");
+//             var listItem = documents.createElement("li");
+//             listItem.appendChild(newLink);
+//             pageLinks.appendChild(listItem);
+//         } else {
+//             alert("hi test test");
+//         }       
+//     }
 </script>
