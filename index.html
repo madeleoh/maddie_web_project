@@ -20,9 +20,9 @@
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
     <div>
-        <button id="redFlag" onclick="selectFlag('red')">&#x1F6D1;</button>
-        <button id="yellowFlag" onclick="selectFlag('yellow')">&#x1F6AB;</button>
-        <button id="greenFlag" onclick="selectFlag('green')">&#x2705;</button>
+        <button id="redFlag" onclick="selectFlag('red')">&#9873;</button>
+        <button id="yellowFlag" onclick="selectFlag('yellow')">&#9873;</button>
+        <button id="greenFlag" onclick="selectFlag('green')">&#9873;</button>
         <button onclick="addTask()">+</button>
     </div>
 
@@ -77,7 +77,7 @@
         padding-top: 0.5px;
         padding-bottom: 0.5px;
         font-size: 18px;
-}
+    }
     button:hover {
         background-color: #FFEFD6;
         color: #FF9505;
@@ -94,6 +94,15 @@
         padding-top: 0.6px;
         padding-bottom: 0.6px;
         font-size: 18px;
+    }
+    #redFlag {
+        color: red;
+    }
+    #yellowFlag {
+        color: yellow;
+    }
+    #greenFlag {
+        color: green;
     }
     /*.sidebar {
         height: 100%;
@@ -207,7 +216,7 @@ function selectFlag(flag) {
     document.getElementById("yellowFlag").style.border = "none";
     document.getElementById("greenFlag").style.border = "none";
 
-    document.getElementById(flag + "Flag").style.border = "2px solid black";
+    document.getElementById(flag + "Flag").style.border = "2px solid white";
 }
 
     function addTask() {
@@ -227,11 +236,14 @@ function selectFlag(flag) {
             let flagIcon = "";
 
         if (selectedFlag === "red") {
-            flagIcon = "&#x1F6D1;";
+            flagIcon = "&#9873;";
+            flagIcon.style.color = "red";
         } else if (selectedFlag === "yellow") {
-            flagIcon = "&#x1F6AB;";
+            flagIcon = "&#9873;";
+            flagIcon.style.color = "yellow";
         } else if (selectedFlag === "green") {
-            flagIcon = "&#x2705;";
+            flagIcon = "&#9873;";
+            selectedFlag.color = "green";
         }
 
             taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + flagIcon + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
