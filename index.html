@@ -13,23 +13,32 @@
         </h1>
     </header>
 
-    <!--<button class="openbtn" onclick="toggleSidebar()">&#9776;</button> Hamburger menu icon -->
+
+    <!-- <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> Hamburger menu icon -->
+
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
-    <button onclick="addTask()">+</button>
+    <div>
+        <button id="redFlag" onclick="selectFlag('red')">&#x1F6D1;</button>
+        <button id="yellowFlag" onclick="selectFlag('yellow')">&#x1F6AB;</button>
+        <button id="greenFlag" onclick="selectFlag('green')">&#x2705;</button>
+        <button onclick="addTask()">+</button>
+    </div>
 
-    <!--<div id="listSidebar" class="sidebar">
+    <!-- <div id="listSidebar" class="sidebar">
+
         <a href="#" onclick="toggleSidebar()"></a>
         <button onclick="addPage()">+</button>
         <ul id="pageLinks"></ul>
         stuff on sidebar will go here i think, will make function to make links??
-        to make current page file-->
+        to make current page file
         <a href="javascript:window.location.reload(true)">To-Do</a>
-    <!--</div>
+    </div> -->
 
     <script src="script.js"></script>
-    <button class="duplicatePage" onclick="duplicatePage()">+</button>-->
+    <!-- <button class="duplicatePage" onclick="duplicatePage()">+</button> -->
+
 </body>
 </html>
 <!-- css -->
@@ -47,8 +56,9 @@
     }
     h1{
         font-size: 50px;
-       font-family: "Blippo", Courier, monospace;
-       position: sticky;
+        font-family: "Blippo", Courier, monospace;
+        position: sticky
+
     }
     #taskInput {
         background: transparent;
@@ -62,10 +72,10 @@
         background-color: #ff9505;
         color:#FFEFD6;
         border: 8px #FFEFD6;
-        transition-duration: 0.4s;
-        padding: 6px;
-        padding-top: 0.6px;
-        padding-bottom: 0.6px;
+        transition-duration: 0.5s;
+        padding: 5px;
+        padding-top: 0.5px;
+        padding-bottom: 0.5px;
         font-size: 18px;
 }
     button:hover {
@@ -85,7 +95,7 @@
         padding-bottom: 0.6px;
         font-size: 18px;
     }
-    .sidebar {
+    /*.sidebar {
         height: 100%;
         width: 0;
         position: fixed;
@@ -107,7 +117,7 @@
         top: 0px;
         left: 30px;
         z-index: 4;
-    }
+    }*/
     span.close:hover {
         background-color: #FFEFD6;
         color: #FF9505;
@@ -126,7 +136,8 @@
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
-        position: relative;
+
+
     }
     </style>
     <ul>
@@ -134,6 +145,8 @@
 
 <!-- javascript -->
 <script>
+    let selectedFlag = null;
+
     function setCookie(name, value, days) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -161,10 +174,10 @@
         setCookie("pageTitle", title, 30);
     }
 
-    function saveTasks() {
+    /*function saveTasks() {
         const tasks = document.getElementById("taskList").innerHTML;
         setCookie("taskList", tasks, 30);
-    }
+    }*/
 
     function loadTitle() {
         const title = getCookie("pageTitle");
@@ -174,36 +187,63 @@
         }
     }
 
-    function loadTasks(){
+    /*function loadTasks(){
         const tasks = getCookie("taskList");
         if (tasks !== "") {
             document.getElementById("taskList").innerText = tasks;
             addCloseEventListeners();
         }
-    }
+    }*/
 
     //title and tasks go on page load
     document.addEventListener("DOMContentLoaded", function() {
         loadTitle();
-        loadTasks();
+        //loadTasks();
     });
 
+function selectFlag(flag) {
+    selectedFlag = flag;
+    document.getElementById("redFlag").style.border = "none";
+    document.getElementById("yellowFlag").style.border = "none";
+    document.getElementById("greenFlag").style.border = "none";
+
+    document.getElementById(flag + "Flag").style.border = "2px solid black";
+}
 
     function addTask() {
-            // task input value
-            var taskInput = document.getElementById("taskInput");
-            var taskText = taskInput.value.trim();
-
+        // task input value
+        var taskInput = document.getElementById("taskInput");
+        var taskText = taskInput.value.trim();
+        
+        if (!selectedFlag) {
+            alert("Please select a flag before adding task!");
+            return;
+        }
         // input is not empty
         if (taskText !== "") {
             // new task element
             var taskElement = document.createElement("div");
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
+
+            let flagIcon = "";
+
+        if (selectedFlag === "red") {
+            flagIcon = "&#x1F6D1;";
+        } else if (selectedFlag === "yellow") {
+            flagIcon = "&#x1F6AB;";
+        } else if (selectedFlag === "green") {
+            flagIcon = "&#x2705;";
+        }
+
+            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + flagIcon + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
             // clear it
             taskInput.value = "";
+            selectedFlag = null;
+            document.getElementById("redFlag").style.border = "none";
+            document.getElementById("yellowFlag").style.border = "none";
+            document.getElementById("greenFlag").style.border = "none";
             saveTasks();
         } else {
             alert("Please enter a task!");
@@ -225,48 +265,40 @@
         }
     }
 
-
-    /*var sidebarOpen = false;
-
-    function toggleSidebar() {
-    var sidebar = document.getElementById("listSidebar");
-    var main = document.getElementById("taskList");
-
-    if (!sidebarOpen) {
-        sidebar.style.width = "400px";
-        main.style.marginLeft = "400px";
-        sidebarOpen = true;
-    } else {
-        sidebar.style.width = "0px";
-        main.style.marginLeft = "0px";
-        sidebarOpen = false;
-    }
+//     //sidebar
+//     var sidebarOpen = false;
 
 
-    }
-    function duplicatePage(){
-        var currentUrl = window.location.href;
-        var newWindow = window.open(currentUrl, '_blank');
-        if (newWindow) {
-            var newLink = document.createElement("a");
-            newLink.href = newWindow.location.href;
-            newLink.textContent = newWindow.document.title;
+//     function toggleSidebar() {
+//     var sidebar = document.getElementById("listSidebar");
+//     var main = document.getElementById("taskList");
 
-            var pageLinks = document.getElementById("pageLinks");
-            var listItem = document.createElement("li");
-            listItem.appendChild(newLink);
-            pageLinks.appendChild(listItem);
-        } else {
-            alert("hi test test");
-        }       
-    }
+//     if (!sidebarOpen) {
+//         sidebar.style.width = "400px";
+//         main.style.marginLeft = "400px";
+//         sidebarOpen = true;
+//     } else {
+//         sidebar.style.width = "0px";
+//         main.style.marginLeft = "0px";
+//         sidebarOpen = false;
+//     }
 
-    function hideLink(){
-        if (sidebarOpen) {
-            newLink.style.display = "none";
-        }
-        //else {
-            //newLink.style.display = 
-        //}
-    } */
+// }
+//     function duplicatePage(){
+//         var currentUrl = window.location.href;
+//         var newWindow = window.open(currentUrl, '_blank');
+//         if (newWindow) {
+//             var newLink = document.createElement("a");
+//             newLink.href = newWindow.location.href;
+//             newLink.textContect = newWindow.document.title;
+
+//             var pageLinks = document.getElementById("pageLinks");
+//             var listItem = documents.createElement("li");
+//             listItem.appendChild(newLink);
+//             pageLinks.appendChild(listItem);
+//         } else {
+//             alert("hi test test");
+//         }       
+//     }
+
 </script>
