@@ -13,7 +13,9 @@
         </h1>
     </header>
 
+
     <!-- <button class="openbtn" onclick="toggleSidebar()">&#9776;</button> Hamburger menu icon -->
+
 
     <div id="taskList"></div>
     <input type="text" id="taskInput" placeholder="Enter a task">
@@ -25,6 +27,7 @@
     </div>
 
     <!-- <div id="listSidebar" class="sidebar">
+
         <a href="#" onclick="toggleSidebar()"></a>
         <button onclick="addPage()">+</button>
         <ul id="pageLinks"></ul>
@@ -35,6 +38,7 @@
 
     <script src="script.js"></script>
     <!-- <button class="duplicatePage" onclick="duplicatePage()">+</button> -->
+
 </body>
 </html>
 <!-- css -->
@@ -54,6 +58,7 @@
         font-size: 50px;
         font-family: "Blippo", Courier, monospace;
         position: sticky
+
     }
     #taskInput {
         background: transparent;
@@ -121,10 +126,18 @@
     a{
        font-size: 20px; 
     }
+
+    .task-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
     input[type="checkbox"] {
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
+
+
     }
     </style>
     <ul>
@@ -255,6 +268,7 @@ function selectFlag(flag) {
 //     //sidebar
 //     var sidebarOpen = false;
 
+
 //     function toggleSidebar() {
 //     var sidebar = document.getElementById("listSidebar");
 //     var main = document.getElementById("taskList");
@@ -286,4 +300,5 @@ function selectFlag(flag) {
 //             alert("hi test test");
 //         }       
 //     }
+
 </script>
