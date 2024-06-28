@@ -145,8 +145,15 @@
         width: 1em;
         height: 1rem;
         accent-color: #FF9505;
-
-
+    }
+    .highlight-red {
+        background-color: red;
+    }
+    .highlight-yellow {
+        background-color: yellow;
+    }
+    .highlight-green {
+        background-color: green;
     }
     </style>
     <ul>
@@ -232,21 +239,22 @@ function selectFlag(flag) {
         if (taskText !== "") {
             // new task element
             var taskElement = document.createElement("div");
+            taskElement.classList.add('task-item');
 
-            let flagIcon = "";
+            var taskTextElement = document.createElement("span");
+            taskTextElement.innerText = taskText;
 
-        if (selectedFlag === "red") {
-            flagIcon = "&#9873;";
-            flagIcon.style.color = "red";
-        } else if (selectedFlag === "yellow") {
-            flagIcon = "&#9873;";
-            flagIcon.style.color = "yellow";
-        } else if (selectedFlag === "green") {
-            flagIcon = "&#9873;";
-            selectedFlag.color = "green";
-        }
+            if (selectedFlag === "red") {
+                taskElement.classList.add('highlight-red');
+            } else if (selectedFlag === "yellow") {
+                taskElement.classList.add('highlight-yellow');
+            } else if (selectedFlag === "green") {
+                taskElement.classList.add('highlight-green');
+            }
 
-            taskElement.innerHTML = '<input type="checkbox"> ' + taskText + " " + flagIcon + " " + '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
+            taskElement.innerHTML = '<input type="checkbox"> ';
+            taskElement.appendChild(taskTextElement);
+            taskElement.innerHTML += '<span class="close" onclick="this.parentNode.style.display = \'none\';">\u00d7</span>';
 
             // append under the heading
             document.getElementById("taskList").appendChild(taskElement);
