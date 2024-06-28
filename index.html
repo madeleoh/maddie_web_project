@@ -191,7 +191,7 @@
     }
 
     function saveTasks() {
-        const tasks = document.getElementById("taskList").innerText;
+        const tasks = document.getElementById("taskList").innerHTML;
         setCookie("taskList", tasks, 30);
     }
 
@@ -206,7 +206,7 @@
     function loadTasks(){
         const tasks = getCookie("taskList");
         if (tasks !== "") {
-            document.getElementById("taskList").innerText = tasks;
+            document.getElementById("taskList").innerHTML = tasks;
             addCloseEventListeners();
         }
     }
