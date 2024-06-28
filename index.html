@@ -245,11 +245,11 @@ function selectFlag(flag) {
             taskTextElement.innerText = taskText;
 
             if (selectedFlag === "red") {
-                taskElement.classList.add('highlight-red');
+                taskTextElement.classList.add('highlight-red');
             } else if (selectedFlag === "yellow") {
-                taskElement.classList.add('highlight-yellow');
+                taskTextElement.classList.add('highlight-yellow');
             } else if (selectedFlag === "green") {
-                taskElement.classList.add('highlight-green');
+                taskTextElement.classList.add('highlight-green');
             }
 
             taskElement.innerHTML = '<input type="checkbox"> ';
