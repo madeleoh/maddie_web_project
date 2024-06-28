@@ -190,10 +190,10 @@
         setCookie("pageTitle", title, 30);
     }
 
-    /*function saveTasks() {
-        const tasks = document.getElementById("taskList").innerHTML;
+    function saveTasks() {
+        const tasks = document.getElementById("taskList").innerText;
         setCookie("taskList", tasks, 30);
-    }*/
+    }
 
     function loadTitle() {
         const title = getCookie("pageTitle");
@@ -203,18 +203,18 @@
         }
     }
 
-    /*function loadTasks(){
+    function loadTasks(){
         const tasks = getCookie("taskList");
         if (tasks !== "") {
             document.getElementById("taskList").innerText = tasks;
             addCloseEventListeners();
         }
-    }*/
+    }
 
     //title and tasks go on page load
     document.addEventListener("DOMContentLoaded", function() {
         loadTitle();
-        //loadTasks();
+        loadTasks();
     });
 
 function selectFlag(flag) {
