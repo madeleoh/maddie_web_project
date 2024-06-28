@@ -185,6 +185,16 @@
         return "";
     }
 
+    function addCloseEventListeners() {
+        var closeButtons = document.getElementsByClassName("close");
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].addEventListener("click", function () {
+                this.parentElement.style.display = 'none';
+                saveTasks();
+            });
+        }
+    }
+
     function saveTitle() {
         const title = document.getElementById("pageTitle").innerText;
         setCookie("pageTitle", title, 30);
@@ -273,16 +283,6 @@ function selectFlag(flag) {
     function removeTask(element) {
         element.parentNode.style.display = 'none';
         saveTasks();
-    }
-
-    function addCloseEventListeners() {
-        var closeButtons = document.getElementsByClassName("close");
-        for (var i = 0; i < closeButtons.length; i++) {
-            closeButtons[i].addEventListener("click", function () {
-                this.parentElement.style.display = 'none';
-                saveTasks();
-            });
-        }
     }
 
 //     //sidebar
